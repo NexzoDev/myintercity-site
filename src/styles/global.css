@@ -55,7 +55,8 @@ body {
 
 main {
   /* The sections are stacked in a flex column so the last one can absorb any
-     leftover viewport height (see the `main > :last-child` rule below). */
+     leftover viewport height (see the `main > section:last-of-type` rule
+     below). */
   display: flex;
   flex-direction: column;
   flex: 1 0 auto;
@@ -64,8 +65,15 @@ main {
 /* Short pages (contact, team profiles) used to end in a white band between the
    last section and the footer, because `main` grew to fill `min-height: 100vh`
    while the sections kept their content height. Letting the final section grow
-   runs its own background all the way down to the footer instead. */
-main > :last-child {
+   runs its own background all the way down to the footer instead.
+
+   This targets `section:last-of-type`, not `:last-child`, on purpose: a
+   component's trailing inline <script> (the contact form's redirect fixup) is
+   hoisted into the page but stays inside <main>, and <script> is
+   `display: none`, so it is not a flex item. With `:last-child` the
+   declaration landed on that script and the section stayed content-height, so
+   the white band came back on /contact/ only. */
+main > section:last-of-type {
   flex: 1 0 auto;
 }
 
@@ -1706,6 +1714,14 @@ strong {
     display: flex;
     flex: 1 0 auto;
     flex-direction: column;
+  }
+
+  /* At this width the photo header is the element that absorbs any spare
+     height (`.subpage-header--contact` above), so the details band has to stay
+     content-sized — otherwise both would grow and split the leftover space,
+     nudging the card and the band off their measured positions. */
+  main > .section.contact-details {
+    flex: 0 0 auto;
   }
 
   .contact-card {

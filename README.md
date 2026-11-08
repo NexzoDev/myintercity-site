@@ -118,6 +118,15 @@ One stylesheet. Breakpoints are max-width 991 / 767 / 479, plus a 480–767 rang
 exactly the first screen at ≥768px, so the certifications band arrives on scroll. Changing hero
 copy, intro-card padding or that block's numbers moves the fold — re-check at 1280×900.
 
+Short pages fill the viewport with their own background: `body` and `main` are flex columns and
+`main > section:last-of-type` gets `flex: 1 0 auto`, so the last band stretches down to the footer
+instead of leaving a white strip. It is `:last-of-type` on purpose — a component's trailing inline
+`<script>` (the contact form's redirect fixup) is hoisted but stays inside `<main>`, and because
+`<script>` is `display: none` a plain `:last-child` selector handed the declaration to it and the
+gap came back on `/contact/`. Below 480px the photo header takes that role instead, so
+`.contact-details` is pinned back to `flex: none` there. Growing the last band only adds space
+below its content, so nothing inside it moves.
+
 ### SEO and discovery
 
 - `BaseLayout.astro` props: `title`, `description`, `ogTitle`, `ogDescription`, `ogType`,
