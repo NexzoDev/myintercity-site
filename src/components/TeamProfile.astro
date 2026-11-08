@@ -1,0 +1,184 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+import headerBg from "../assets/images/kuala-20lumpur-20skyline.webp";
+import iconFacebook from "../assets/images/cool-icon-facebook.webp";
+import iconInstagram from "../assets/images/cool-icon-instagram.webp";
+import iconWhatsapp from "../assets/images/cool-icon-whatsapp.webp";
+
+interface Props {
+  name: string;
+  role: string;
+  photo: ImageMetadata;
+  /** Link to the downloadable .vcf contact card */
+  vcardUrl: string;
+  phone: string;
+  email: string;
+  facebookUrl: string;
+  instagramUrl: string;
+  whatsappUrl: string;
+}
+
+const {
+  name,
+  role,
+  photo,
+  vcardUrl,
+  phone,
+  email,
+  facebookUrl,
+  instagramUrl,
+  whatsappUrl,
+} = Astro.props;
+
+const siteUrl = Astro.site ?? new URL("https://www.myintercity.com");
+const organisationId = new URL("/#organization", siteUrl).href;
+const pagePath = Astro.url.pathname; // e.g. /noraini/
+const pageUrl = new URL(pagePath, siteUrl).href;
+const personId = new URL(`${pagePath}#person`, siteUrl).href;
+
+/* The page <title> used to be just the person's name, which gave every profile
+   the same shape of result and no hint of the company behind it. */
+const title = `${name} — ${role} | Inter City Service & Travel`;
+const description = `${name} is the ${role} at Inter City Service & Travel, a corporate and leisure travel agency in Kuala Lumpur, Malaysia. Reach ${name} directly by phone, email or WhatsApp.`;
+
+const schema = [
+  {
+    "@type": "ProfilePage",
+    "@id": new URL(`${pagePath}#webpage`, siteUrl).href,
+    url: pageUrl,
+    name: title,
+    description,
+    inLanguage: "en-MY",
+    about: { "@id": personId },
+    mainEntity: { "@id": personId },
+    isPartOf: { "@id": new URL("/#website", siteUrl).href },
+  },
+  {
+    "@type": "Person",
+    "@id": personId,
+    name,
+    jobTitle: role,
+    url: pageUrl,
+    telephone: phone,
+    email,
+    worksFor: { "@id": organisationId },
+    sameAs: [facebookUrl, instagramUrl],
+  },
+  {
+    "@type": "BreadcrumbList",
+    "@id": new URL(`${pagePath}#breadcrumbs`, siteUrl).href,
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: new URL("/", siteUrl).href,
+      },
+      { "@type": "ListItem", position: 2, name, item: pageUrl },
+    ],
+  },
+] satisfies Record<string, unknown>[];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  ogTitle={`${name} — ${role}`}
+  ogType="profile"
+  schema={schema}
+>
+  <section class="subpage-header subpage-header--contact">
+    <Image
+      class="subpage-header__bg"
+      src={headerBg}
+      alt=""
+      widths={[800, 1000, 1280, 1600]}
+      sizes="100vw"
+      format="webp"
+      quality={70}
+      loading="eager"
+    />
+    <div class="subpage-header__overlay"></div>
+
+    <div class="container">
+      <div class="profile__inner">
+        <div class="profile__photo-wrap">
+          <Image
+            src={photo}
+            alt={name}
+            class="profile__photo"
+            widths={[280, 400, 560]}
+            sizes="(max-width: 479px) 58vw, 280px"
+            format="webp"
+            quality={82}
+            loading="eager"
+          />
+        </div>
+
+        <h1 class="profile__name">{name}</h1>
+        <h2 class="profile__role">{role}</h2>
+
+        <a class="btn btn--pill" href={vcardUrl}>save contact</a>
+        <a class="btn btn--pill" href={`tel:${phone}`}>Phone</a>
+        <a class="btn btn--pill" href={`mailto:${email}`}>Email</a>
+
+        <div class="profile__socials">
+          <a
+            class="profile__social-link"
+            href={facebookUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${name} on Facebook`}
+          >
+            <Image
+              src={iconFacebook}
+              alt=""
+              width={40}
+              height={40}
+              format="webp"
+              quality={90}
+              loading="eager"
+            />
+          </a>
+          <a
+            class="profile__social-link"
+            href={instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${name} on Instagram`}
+          >
+            <Image
+              src={iconInstagram}
+              alt=""
+              width={40}
+              height={40}
+              format="webp"
+              quality={90}
+              loading="eager"
+            />
+          </a>
+          <a
+            class="profile__social-link"
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Chat with ${name} on WhatsApp`}
+          >
+            <Image
+              src={iconWhatsapp}
+              alt=""
+              width={40}
+              height={40}
+              format="webp"
+              quality={90}
+              loading="eager"
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

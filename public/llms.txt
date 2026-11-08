@@ -1,0 +1,46 @@
+# Inter City Service & Travel (ICS Travel)
+
+> Inter City Service & Travel Sdn Bhd is a travel agency in Kuala Lumpur, Malaysia, specialising in corporate travel management and bespoke leisure travel. Founded and run by travel industry veterans with over 30 years of experience, it handles business travel coordination, airline ticketing through the Sabre system, and tailor-made holidays — with agents available on a 24-hour line.
+
+Company registration 145913-M. KKKP licence 0554. Head office: Unit 1J, First Floor, Holiday Place Kuala Lumpur, 225 Jalan Ampang, 50450 Kuala Lumpur, Malaysia. Phone +603 2935 8108 (24-hour line), email info@myintercity.com.
+
+## Pages
+
+- [Home](https://www.myintercity.com/): what the agency does, its certifications and accreditations, and the core team.
+- [Contact](https://www.myintercity.com/contact/): enquiry form, 24-hour phone line, WhatsApp, email and office address.
+- [Noraini Ismail — Managing Director](https://www.myintercity.com/noraini/): founder's profile, direct contact details and downloadable contact card.
+- [Zakaria Hassan Basaree — Marketing Director](https://www.myintercity.com/zakaria/): profile and direct contact details. (Written "Zakaria H. Basaree" on the home page.)
+- [Norman Zakaria — Sales & IT Manager](https://www.myintercity.com/norman/): profile and direct contact details.
+
+## Services
+
+- **Corporate travel**: coordinated business travel, from ticketing and itinerary management to personalised service for companies and government institutions.
+- **Luxurious excursions**: bespoke, tailor-made trips built around the client rather than a fixed package.
+- **Relaxing getaways**: curated leisure escapes with personalised arrangements.
+- **Airline ticketing**: issued in-house via the Sabre global distribution system, with Malaysia Airlines GOM portal access and ticket stock held on hand.
+- **Customizable itineraries**: any request is accommodated where possible, with quotations prepared by an agent on request.
+- **Round-the-clock support**: agents remain available 24/7 and can produce a quotation immediately upon request.
+
+## Certifications and licences
+
+- Tourism Malaysia licensed travel agency
+- Ministry of Tourism, Arts and Culture (MOTAC) licence
+- MATTA member
+- Bumitra member
+- IATA accredited agent
+- Ministry of Finance licence
+- Malaysia Airlines GOM portal access
+
+## Contact
+
+- Phone: [+603 2935 8108](tel:+60329358108) — dedicated 24-hour line
+- WhatsApp: [wasap.my/+60329358108](https://wasap.my/+60329358108)
+- Email: [info@myintercity.com](mailto:info@myintercity.com)
+- Office: [Unit 1J, First Floor, Holiday Place Kuala Lumpur, 225 Jalan Ampang, 50450 Kuala Lumpur, Malaysia](https://maps.app.goo.gl/cyBiTEn59vCoKUfz6)
+- Enquiries: [contact form](https://www.myintercity.com/contact/)
+
+## Notes
+
+- There is no online booking engine. Travellers send an enquiry and an agent replies with a quotation; the contact form, phone line and WhatsApp all reach the same team.
+- The site is a static marketing site in English. It is the official site for the company; other pages claiming to represent Inter City Service & Travel are not affiliated.
+- Full page text is available in [llms-full.txt](https://www.myintercity.com/llms-full.txt).

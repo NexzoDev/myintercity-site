@@ -1,0 +1,226 @@
+---
+import { Image } from "astro:assets";
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+import headerBg from "../assets/images/kuala-20lumpur-20skyline.webp";
+
+/* SilentForms access key (https://silentforms.com). This is a public form token:
+   it can only deliver submissions to the inbox it was issued for, and a static
+   build would inline it into the HTML even if it were read from an env var — so
+   it lives here as a constant instead of requiring deploy-time configuration. */
+const silentFormsKey =
+  "52e63f97efe71c9badb6aabbddc63deffabe3a2472346803e9bf8bae4a7c5aee";
+const silentFormsEndpoint = "https://silentforms.com/api/submit";
+
+const siteUrl = Astro.site ?? new URL("https://www.myintercity.com");
+
+/* After a successful POST, SilentForms sends the visitor to this page instead of
+   its own generic confirmation screen. */
+const thankYouUrl = new URL("/thank-you/", siteUrl).href;
+
+const title = "Contact Us | Inter City Service & Travel";
+const description =
+  "Get in touch with Inter City Service & Travel in Kuala Lumpur — 24-hour phone line, WhatsApp, email, or visit our Ampang office. Corporate and leisure travel specialists.";
+
+const organisationId = new URL("/#organization", siteUrl).href;
+
+const schema = [
+  {
+    "@type": "ContactPage",
+    "@id": new URL("/contact/#webpage", siteUrl).href,
+    url: new URL("/contact/", siteUrl).href,
+    name: title,
+    description,
+    inLanguage: "en-MY",
+    about: { "@id": organisationId },
+    mainEntity: { "@id": organisationId },
+  },
+  {
+    "@type": "BreadcrumbList",
+    "@id": new URL("/contact/#breadcrumbs", siteUrl).href,
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: new URL("/", siteUrl).href,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Contact",
+        item: new URL("/contact/", siteUrl).href,
+      },
+    ],
+  },
+] satisfies Record<string, unknown>[];
+
+const contactDetails = [
+  {
+    heading: "OUR OFFICE",
+    body: "Unit 1J, First Floor,\nHoliday Place Kuala Lumpur,\n225, Jalan Ampang, 50450, Kuala Lumpur, Malaysia.",
+    href: "https://maps.app.goo.gl/cyBiTEn59vCoKUfz6",
+    label: "LOCATION",
+    external: true,
+  },
+  {
+    heading: "CALL US",
+    body: "Feel free to call any of our agents waiting to take down your reservation on our dedicated 24-hour line linked below.",
+    href: "tel:+60329358108",
+    label: "PHONE",
+    external: false,
+  },
+  {
+    heading: "MAIL US",
+    body: "Need to send us intricate details for a quotation or a customized travel plan? Send us an email with the button below.",
+    href: "mailto:info@myintercity.com",
+    label: "EMAIL",
+    external: false,
+  },
+  {
+    heading: "WHATSAPP US",
+    body: "If your preferred method of communication is through WhatsApp, please feel free to drop us a message below.",
+    href: "https://wasap.my/+60329358108",
+    label: "WHATSAPP",
+    external: true,
+  },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  ogTitle="Contact Inter City Service & Travel"
+  schema={schema}
+>
+  <section class="subpage-header subpage-header--contact">
+    <Image
+      class="subpage-header__bg"
+      src={headerBg}
+      alt=""
+      widths={[800, 1000, 1280, 1600]}
+      sizes="100vw"
+      format="webp"
+      quality={70}
+      loading="eager"
+    />
+    <div class="subpage-header__overlay"></div>
+
+    <div class="container">
+      <div class="contact-card" data-anim="fade-up" style="--anim-delay: 200ms">
+        <form
+          id="contact-form"
+          action={silentFormsEndpoint}
+          method="POST"
+        >
+          <h1 class="contact-card__title">What are you waiting for?</h1>
+          <h2 class="contact-card__subtitle">
+            Do you have a question? Contact us now!
+          </h2>
+
+          <input type="hidden" name="accessKey" value={silentFormsKey} />
+          {/* Absolute URL only: SilentForms rejects a plain HTML post whose
+              redirect is not a valid absolute URL with a 400, so the value
+              cannot be a relative path. See the script at the end of the page. */}
+          <input type="hidden" name="redirect" value={thankYouUrl} id="form-redirect" />
+
+          <label class="field-label" for="name">Name:</label>
+          <input
+            class="field"
+            id="name"
+            name="name"
+            type="text"
+            maxlength="256"
+            autocomplete="name"
+            required
+          />
+
+          <label class="field-label" for="email">Email address:</label>
+          <input
+            class="field"
+            id="email"
+            name="email"
+            type="email"
+            maxlength="256"
+            autocomplete="email"
+            required
+          />
+
+          <label class="field-label" for="message">Your message:</label>
+          <textarea
+            class="field field--area"
+            id="message"
+            name="message"
+            maxlength="5000"
+            required></textarea>
+
+          <input class="btn" type="submit" value="Send Email" />
+
+          <div class="honeypot" aria-hidden="true">
+            <label for="sf_extra">If you are a human, leave this blank:</label>
+            <input
+              id="sf_extra"
+              name="sf_extra"
+              type="text"
+              tabindex="-1"
+              autocomplete="off"
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+  <section class="section contact-details">
+    <div class="container">
+      <div class="contact-details__grid">
+        {
+          contactDetails.map((detail) => (
+            <div class="contact-details__cell">
+              <h4>{detail.heading}</h4>
+              <div class="contact-details__body">{detail.body}</div>
+              <a
+                class="btn"
+                href={detail.href}
+                target={detail.external ? "_blank" : undefined}
+                rel={detail.external ? "noopener noreferrer" : undefined}
+              >
+                {detail.label}
+              </a>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <script>
+    /* The redirect field must hold an absolute URL — SilentForms answers a plain
+       HTML post with a 400 when it is not one — so a static build cannot emit the
+       origin the page happens to be served from. The rendered HTML keeps the
+       canonical production URL and this swaps the origin when the page is served
+       from anywhere else (astro dev on any port, astro preview, a staging
+       domain), so submitting locally lands on the local /thank-you/ page instead
+       of the production one. On the production origin the value already matches
+       and nothing is touched.
+
+       This only moves the redirect target: if the key has "Allowed domains" set
+       in the SilentForms dashboard, a submission posted from localhost is
+       rejected with a 403 before any redirect happens, because that check reads
+       the request's Origin header. */
+    const redirectField = document.getElementById("form-redirect");
+    if (
+      redirectField instanceof HTMLInputElement &&
+      (location.protocol === "http:" || location.protocol === "https:")
+    ) {
+      try {
+        const canonical = new URL(redirectField.value);
+        if (canonical.origin !== location.origin) {
+          redirectField.value = new URL(canonical.pathname, location.origin).href;
+        }
+      } catch {
+        // Leave the rendered value alone if it is not parseable.
+      }
+    }
+  </script>
+</BaseLayout>
+

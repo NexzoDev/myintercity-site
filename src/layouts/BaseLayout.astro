@@ -1,0 +1,289 @@
+---
+import "@fontsource/source-sans-pro/latin-200.css";
+import "@fontsource/source-sans-pro/latin-300.css";
+import "@fontsource/source-sans-pro/latin-400.css";
+import "@fontsource/source-sans-pro/latin-600.css";
+import "@fontsource/source-sans-pro/latin-700.css";
+import "@fontsource/source-sans-pro/latin-700-italic.css";
+import "../styles/global.css";
+
+import Footer from "../components/Footer.astro";
+import Navbar from "../components/Navbar.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogType?: string;
+  /** Social share image; root-relative or absolute. Defaults to /og-image.jpg. */
+  image?: string;
+  imageAlt?: string;
+  /** Keep the page out of search results (thank-you and 404 pages). */
+  noindex?: boolean;
+  /** Extra schema.org nodes appended to the page graph (Person, BreadcrumbList, …). */
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  title,
+  description,
+  ogTitle = title,
+  ogDescription = description,
+  ogType = "website",
+  image = "/og-image.jpg",
+  imageAlt = "Inter City Service & Travel — corporate and leisure travel specialists in Kuala Lumpur",
+  noindex = false,
+  schema,
+} = Astro.props;
+
+const siteUrl = Astro.site ?? new URL("https://www.myintercity.com");
+const absolute = (path: string) => new URL(path, siteUrl).href;
+const canonical = absolute(Astro.url.pathname);
+const shareImage = absolute(image);
+
+const robotsContent = noindex
+  ? "noindex, follow"
+  : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
+
+const organisationId = absolute("/#organization");
+const websiteId = absolute("/#website");
+
+/* One @graph per page: the organisation and website nodes travel with every
+   page, and pages append their own (Person, ProfilePage, BreadcrumbList, …) via
+   the `schema` prop so the whole site describes the same entities. */
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TravelAgency",
+      "@id": organisationId,
+      name: "Inter City Service & Travel Sdn Bhd",
+      alternateName: ["Inter City Service & Travel", "ICS Travel"],
+      url: absolute("/"),
+      logo: absolute("/web-app-manifest-512x512.png"),
+      image: shareImage,
+      description:
+        "Corporate and leisure travel agency in Kuala Lumpur, Malaysia. Corporate travel coordination, air ticket issuance and bespoke holidays, with a 24-hour agent line.",
+      slogan: "All your travel needs in one place.",
+      telephone: "+60329358108",
+      email: "info@myintercity.com",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress:
+          "Unit 1J, First Floor, Holiday Place Kuala Lumpur, 225 Jalan Ampang",
+        postalCode: "50450",
+        addressLocality: "Kuala Lumpur",
+        addressRegion: "Kuala Lumpur",
+        addressCountry: "MY",
+      },
+      areaServed: [
+        { "@type": "Country", name: "Malaysia" },
+        { "@type": "Place", name: "Worldwide" },
+      ],
+      openingHoursSpecification: {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ],
+        opens: "00:00",
+        closes: "23:59",
+      },
+      knowsAbout: [
+        "Corporate travel management",
+        "Business travel coordination",
+        "Airline ticketing",
+        "Sabre global distribution system",
+        "Malaysia Airlines GOM portal",
+        "Luxury and bespoke excursions",
+        "Leisure holidays and getaways",
+        "Customizable travel itineraries",
+      ],
+      hasCredential: [
+        {
+          "@type": "EducationalOccupationalCredential",
+          credentialCategory: "license",
+          name: "Tourism Malaysia licensed travel agency",
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          credentialCategory: "license",
+          name: "Ministry of Tourism, Arts and Culture (MOTAC) licence",
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          credentialCategory: "license",
+          name: "Ministry of Finance licence",
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          credentialCategory: "membership",
+          name: "MATTA member",
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          credentialCategory: "membership",
+          name: "Bumitra member",
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          credentialCategory: "certification",
+          name: "IATA accredited agent",
+        },
+      ],
+      identifier: [
+        {
+          "@type": "PropertyValue",
+          propertyID: "Company registration",
+          value: "145913-M",
+        },
+        { "@type": "PropertyValue", propertyID: "KKKP licence", value: "0554" },
+      ],
+      founder: {
+        "@type": "Person",
+        "@id": absolute("/noraini/#person"),
+        name: "Noraini Ismail",
+        jobTitle: "Managing Director",
+        url: absolute("/noraini/"),
+      },
+      employee: [
+        {
+          "@type": "Person",
+          "@id": absolute("/noraini/#person"),
+          name: "Noraini Ismail",
+          jobTitle: "Managing Director",
+          url: absolute("/noraini/"),
+        },
+        {
+          "@type": "Person",
+          "@id": absolute("/zakaria/#person"),
+          name: "Zakaria Hassan Basaree",
+          alternateName: "Zakaria H. Basaree",
+          jobTitle: "Marketing Director",
+          url: absolute("/zakaria/"),
+        },
+        {
+          "@type": "Person",
+          "@id": absolute("/norman/#person"),
+          name: "Norman Zakaria",
+          jobTitle: "Sales & IT Manager",
+          url: absolute("/norman/"),
+        },
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": websiteId,
+      url: absolute("/"),
+      name: "Inter City Service & Travel",
+      inLanguage: "en-MY",
+      publisher: { "@id": organisationId },
+    },
+    ...(schema ? (Array.isArray(schema) ? schema : [schema]) : []),
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      // Reveal animations start hidden; only arm those start states when the
+      // browser can actually run the reveal script (IntersectionObserver is the
+      // script's only hard requirement), so the content is never left invisible.
+      if ("IntersectionObserver" in window) {
+        document.documentElement.classList.add("js");
+      }
+    </script>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Inter City Service & Travel Sdn Bhd" />
+    <meta name="robots" content={robotsContent} />
+    <meta name="theme-color" content="#03005b" />
+    <link rel="canonical" href={canonical} />
+    <link
+      rel="sitemap"
+      type="application/xml"
+      title="Sitemap"
+      href="/sitemap.xml"
+    />
+
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="Inter City Service & Travel" />
+    <meta property="og:locale" content="en_MY" />
+    <meta property="og:image" content={shareImage} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={imageAlt} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={ogDescription} />
+    <meta name="twitter:image" content={shareImage} />
+    <meta name="twitter:image:alt" content={imageAlt} />
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="ICS Travel" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(structuredData)}
+    />
+  </head>
+  <body>
+    <Navbar />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      const loadReveals = () =>
+        document
+          .querySelectorAll("[data-anim]")
+          .forEach((el) => el.classList.add("is-shown"));
+
+      // The export fired its load tweens after the page load event, then waited
+      // (per element) before tweening; the wait lives in --anim-delay.
+      if (document.readyState === "complete") {
+        requestAnimationFrame(loadReveals);
+      } else {
+        window.addEventListener("load", () => requestAnimationFrame(loadReveals), {
+          once: true,
+        });
+      }
+
+      // Scroll reveals replay whenever the element enters the viewport and undo
+      // themselves when it leaves, which is what the original scroll trigger did.
+      // The -10% bottom margin is the export's `offsetBot: 10%`.
+      const scrolled = document.querySelectorAll("[data-anim-scroll]");
+      if (scrolled.length) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) =>
+              entry.target.classList.toggle("is-shown", entry.isIntersecting),
+            );
+          },
+          { rootMargin: "0px 0px -10% 0px" },
+        );
+        scrolled.forEach((el) => observer.observe(el));
+      }
+    </script>
+  </body>
+</html>

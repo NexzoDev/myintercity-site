@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+/* SilentForms sends visitors here after a successful submission (see the hidden
+   `redirect` input in contact.astro). It is noindex: it exists to confirm the
+   message was sent, not to rank. */
+const title = "Message sent | Inter City Service & Travel";
+const description =
+  "Thank you — your enquiry has reached Inter City Service & Travel. One of our agents will reply to the email address you provided.";
+---
+
+<BaseLayout title={title} description={description} noindex>
+  <section class="notice">
+    <div class="container notice__inner">
+      <h1 class="notice__title">Thank you — your message is on its way</h1>
+      <p class="notice__text">
+        One of our agents has received your enquiry and will reply to the email
+        address you gave us. If it is urgent, call our 24-hour line on{" "}
+        <a href="tel:+60329358108">+603 2935 8108</a>.
+      </p>
+      <div class="notice__actions">
+        <a class="btn" href="/">Back to home</a>
+        <a
+          class="btn btn--outline"
+          href="https://wasap.my/+60329358108"
+          target="_blank"
+          rel="noopener noreferrer">Chat on WhatsApp</a
+        >
+      </div>
+    </div>
+  </section>
+</BaseLayout>

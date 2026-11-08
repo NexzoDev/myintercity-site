@@ -1,0 +1,381 @@
+---
+import { Image } from "astro:assets";
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+import heroBg from "../assets/images/kuala-20lumpur-20skyline.webp";
+import introCorporate from "../assets/images/travel-20agent.webp";
+import introLuxury from "../assets/images/kuala-20lumpur.webp";
+import introGetaway from "../assets/images/lang-20tengah-20island.webp";
+import certsBg from "../assets/images/batu-20caves.webp";
+import certTourism from "../assets/images/tourism.webp";
+import certMotac from "../assets/images/motac.webp";
+import certMatta from "../assets/images/matta.webp";
+import certBumitra from "../assets/images/bumitra.webp";
+import certIata from "../assets/images/iata.webp";
+import certMas from "../assets/images/mas.webp";
+import globeImg from "../assets/images/world.webp";
+import planeImg from "../assets/images/plane.webp";
+import travellerImg from "../assets/images/traveller.webp";
+import iconResponsive from "../assets/images/icon-responsive.webp";
+import iconCustomize from "../assets/images/icon-customize.webp";
+import ctaCard from "../assets/images/card.webp";
+import norainiPhoto from "../assets/images/complete-noraini.webp";
+import zakariaPhoto from "../assets/images/complete-zakaria.webp";
+import normanPhoto from "../assets/images/complete-norman.webp";
+
+const certifications = [
+  { src: certTourism, alt: "Tourism Malaysia" },
+  { src: certMotac, alt: "Ministry of Tourism and Culture" },
+  { src: certMatta, alt: "MATTA" },
+  { src: certBumitra, alt: "Bumitra" },
+  { src: certIata, alt: "IATA Accredited Agent" },
+  { src: certMas, alt: "Malaysia Airlines GOM" },
+];
+
+const team = [
+  {
+    name: "Noraini Ismail",
+    role: "Managing Director",
+    href: "/noraini/",
+    photo: norainiPhoto,
+    bio: "A veteran in the travel industry with over 30 years of experience. As the founder of ICS Travel and a seasoned leader, she has revolutionized the industry, notably through pioneering partnerships and a keen ability to satisfy clients' needs with fairness and precision.",
+  },
+  {
+    name: "Zakaria H. Basaree",
+    role: "Marketing Director",
+    href: "/zakaria/",
+    photo: zakariaPhoto,
+    bio: "The driving force behind ICS Travel's marketing endeavors for over three decades. Renowned for his problem-solving prowess and client-centric approach, Zakaria ensures the company's global standing while spearheading impactful campaigns with passion and precision.",
+  },
+  {
+    name: "Norman Zakaria",
+    role: "Sales & IT Manager",
+    href: "/norman/",
+    photo: normanPhoto,
+    bio: "Armed with a Computer Science degree and extensive sales experience, Norman modernized our IT systems, reducing costs and enhancing efficiency. Now, he effortlessly balances client visits and sales initiatives, ensuring our continued success as an industry leader.",
+  },
+];
+
+const title = "Inter City Service & Travel";
+const description = "Your premier partner for corporate & leisure travel";
+---
+
+<BaseLayout title={title} description={description}>
+  {/* Grouped so the two can be sized together: on desktop the pair fills the
+      first screen exactly and the certs band starts at the fold. See the
+      "Desktop fold" block at the end of global.css. */}
+  <div class="above-fold">
+    <section class="hero">
+      <Image
+        class="hero__bg"
+        src={heroBg}
+        alt="Kuala Lumpur skyline at dusk"
+        /* 1000 covers 800-1200px windows, 1280 covers the common laptop width
+           (with sizes="100vw" a 1280px window needs a >=1280 entry or it takes
+           the 1600 file), 1600 stays for retina and larger screens. */
+        widths={[800, 1000, 1280, 1600]}
+        sizes="100vw"
+        format="webp"
+        quality={70}
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="hero__overlay">
+        <div class="container hero__inner">
+          <h1 class="hero__title" data-anim="fade-up" style="--anim-delay: 200ms">
+            All your travel needs<br />in one place.
+          </h1>
+          <h2 class="hero__subtitle" data-anim="fade" style="--anim-delay: 600ms">
+            From booking to managing, corporate travel has never been this smooth.
+          </h2>
+        </div>
+      </div>
+    </section>
+
+    <div class="section intro">
+      <div class="container">
+        <div class="intro__grid">
+          <article class="intro__card" data-anim="zoom" style="--anim-delay: 400ms">
+            <div class="intro__media">
+              <Image
+                src={introCorporate}
+                alt="Corporate travel consultant assisting a client"
+                widths={[320, 480, 640]}
+                sizes="(max-width: 767px) 90vw, 30vw"
+                format="webp"
+                quality={78}
+                loading="eager"
+              />
+            </div>
+            <div class="intro__text">
+              <h2 class="intro__title">Corporate Travel</h2>
+              <p>
+                Elevate your corporate travel with our streamlined solutions, offering
+                seamless coordination and personalized service to optimize your business
+                ventures.
+              </p>
+            </div>
+          </article>
+
+          <article
+            class="intro__card intro__card--mid"
+            data-anim="zoom"
+            style="--anim-delay: 800ms"
+          >
+            <div class="intro__media">
+              <Image
+                src={introLuxury}
+                alt="Kuala Lumpur cityscape"
+                widths={[400, 600, 800]}
+                sizes="(max-width: 767px) 90vw, 45vw"
+                format="webp"
+                quality={78}
+                loading="eager"
+              />
+            </div>
+            <div class="intro__text intro__text--mid">
+              <h2 class="intro__title">Luxurious Excursions</h2>
+              <p>
+                Experience ultimate luxury with our bespoke excursions, tailored to exceed
+                expectations at every destination.
+              </p>
+            </div>
+            <a href="#Contact" class="btn cta-desktop">get in touch with us today</a>
+          </article>
+
+          <article class="intro__card" data-anim="zoom" style="--anim-delay: 700ms">
+            <div class="intro__media">
+              <Image
+                src={introGetaway}
+                alt="Lang Tengah island beach"
+                widths={[320, 480, 640]}
+                sizes="(max-width: 767px) 90vw, 30vw"
+                format="webp"
+                quality={78}
+                loading="eager"
+              />
+            </div>
+            <div class="intro__text">
+              <h2 class="intro__title">Relaxing Getaways</h2>
+              <p>
+                Relax and rejuvenate with our curated escapes to serene destinations,
+                offering personalized amenities amidst breathtaking scenery.
+              </p>
+            </div>
+            <a href="#Contact" class="btn cta-mobile">get in touch with us today</a>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="certs">
+    <Image
+      class="certs__bg"
+      src={certsBg}
+      alt=""
+      widths={[640, 1024, 1440]}
+      sizes="100vw"
+      format="webp"
+      quality={55}
+      loading="lazy"
+    />
+    <div class="certs__overlay">
+      <div class="container">
+        <div class="heading-block">
+          <h2 class="section-title">
+            Certified and accredited for your <strong>peace </strong>of mind
+          </h2>
+          <div class="section-desc section-desc--narrow">
+            Our travel agency holds certifications from Tourism Malaysia, MOTAC, MATTA,
+            Bumitra, and IATA, alongside licenses from the Ministry of Finance. With
+            access to Malaysia Airlines GOM portal and ample ticket stock, we're fully
+            prepared to handle corporate travel needs for both corporations and government
+            institutions, ensuring seamless experiences from ticket issuance to journey
+            completion.
+          </div>
+        </div>
+
+        <div class="certs__grid">
+          {
+            certifications.map((cert) => (
+              <Image
+                class="certs__logo"
+                src={cert.src}
+                alt={cert.alt}
+                width={400}
+                height={400}
+                format="webp"
+                quality={85}
+                loading="lazy"
+              />
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="container">
+      <div class="features__grid">
+        <div class="features__collage">
+          <Image
+            class="features__world"
+            src={globeImg}
+            alt=""
+            widths={[320, 515]}
+            sizes="515px"
+            format="webp"
+            quality={80}
+            loading="lazy"
+            data-anim-scroll="shift"
+          />
+          <Image
+            class="features__plane"
+            src={planeImg}
+            alt="Airplane"
+            /* Webflow's candidate list (500/800/1200) is what the browser actually
+               picks at 400 CSS px, and its 500x333 resize is 0.3px shorter than the
+               1.5 ratio of the original PNG — matching the list keeps the layout
+               height identical to the export. */
+            widths={[500, 800, 1200]}
+            sizes="(max-width: 479px) 180px, (max-width: 767px) 315px, 400px"
+            format="webp"
+            quality={80}
+            loading="lazy"
+            data-anim-scroll="slide"
+            style="--anim-delay: 500ms"
+          />
+          <Image
+            class="features__traveller"
+            src={travellerImg}
+            alt="Traveller"
+            widths={[300, 490]}
+            sizes="300px"
+            format="webp"
+            quality={80}
+            loading="lazy"
+            data-anim-scroll="slide"
+            style="--anim-delay: 700ms; --anim-out: 500ms"
+          />
+        </div>
+
+        <div class="features__content">
+          <div class="heading-block">
+            <h2 class="section-title">
+              <strong>Hassle-free</strong> traveling wherever you go
+            </h2>
+          </div>
+
+          <div class="feature">
+            <Image
+              class="feature__icon"
+              src={iconResponsive}
+              alt=""
+              width={34}
+              height={34}
+              format="webp"
+              quality={90}
+              loading="lazy"
+            />
+            <h3 class="feature__title">Ready to serve you 24/7</h3>
+            <p>
+              Our dedicated agents remain available round-the-clock to promptly address
+              your inquiries. Leveraging our advanced ticketing system, Sabre, any of our
+              agents can swiftly provide you with a quotation upon request.
+            </p>
+          </div>
+
+          <div class="feature">
+            <Image
+              class="feature__icon"
+              src={iconCustomize}
+              alt=""
+              width={34}
+              height={34}
+              format="webp"
+              quality={90}
+              loading="lazy"
+            />
+            <h3 class="feature__title">Customizable travel itineraries</h3>
+            <p>
+              We pride ourselves on offering highly customizable travel experiences, and
+              our commitment is to fulfill your every request to the best of our
+              abilities, ensuring you receive precisely what you desire.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="Contact" class="cta">
+    <Image
+      class="cta__bg"
+      src={ctaCard}
+      alt=""
+      widths={[800, 1200, 1600]}
+      sizes="(max-width: 767px) 100vw, 60vw"
+      format="webp"
+      quality={70}
+      loading="lazy"
+    />
+    <div class="cta__scrim"></div>
+
+    <div class="container">
+      <div class="cta__content">
+        <div class="heading-block heading-block--tight">
+          <h2 class="section-title">
+            We are always at your <strong>fingertips</strong>
+          </h2>
+        </div>
+        <p>
+          All our agents are ready and will be with you shortly. You can reach us via
+          email, WhatsApp or our dedicated 24-hour line.
+        </p>
+        <div class="cta__actions">
+          <a href="/contact/" class="btn">Contact us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="homepages" class="team">
+    <div class="container">
+      <div class="heading-block heading-block--centered">
+        <div class="eyebrow">curious about us?</div>
+        <h2 class="section-title">Meet Our Team</h2>
+        <div class="section-desc">
+          We have an excellent team of agents standing by to assist you but here are some
+          of our core members.
+        </div>
+      </div>
+    </div>
+
+    <div class="team__grid">
+      {
+        team.map((member) => (
+          <article class="team-card">
+            <a href={member.href} class="team-card__photo-link">
+              <Image
+                class="team-card__photo"
+                src={member.photo}
+                alt={`${member.name}, ${member.role}`}
+                widths={[280, 400, 560]}
+                sizes="(max-width: 479px) 63vw, (max-width: 991px) 20vw, 15vw"
+                format="webp"
+                quality={82}
+                loading="lazy"
+              />
+            </a>
+            <h2 class="team-card__name">
+              <a href={member.href}>{member.name}</a>
+            </h2>
+            <p class="team-card__bio">{member.bio}</p>
+            <p class="team-card__role">{member.role}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

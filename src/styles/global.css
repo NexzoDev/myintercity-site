@@ -1,0 +1,2077 @@
+/* ==========================================================================
+   Inter City Service & Travel — global stylesheet
+   Rebuilt from the original Webflow export. No CSS frameworks, no JS.
+   ========================================================================== */
+
+/* --- Design tokens -------------------------------------------------------- */
+:root {
+  --color-primary: #1f6fff;
+  --color-primary-dark: #0b4fc9;
+  --color-navy: #03005b;
+  --color-navy-deep: #1c1855;
+  --color-green: #5ec045;
+  --color-purple: #b75dda;
+
+  --color-ink: #333;
+  --color-ink-soft: #505255;
+  --color-ink-muted: #9a9da3;
+  --color-heading: #2e3241;
+
+  --font-body: "Source Sans Pro", system-ui, -apple-system, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+
+  --container: 940px;
+  --gutter: 15px;
+  --radius: 4px;
+  --shadow-card: 0 0 30px rgba(0, 0, 0, 0.07);
+}
+
+/* --- Reset --------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--color-ink);
+  background-color: #fff;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 23px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+main {
+  /* The sections are stacked in a flex column so the last one can absorb any
+     leftover viewport height (see the `main > :last-child` rule below). */
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+}
+
+/* Short pages (contact, team profiles) used to end in a white band between the
+   last section and the footer, because `main` grew to fill `min-height: 100vh`
+   while the sections kept their content height. Letting the final section grow
+   runs its own background all the way down to the footer instead. */
+main > :last-child {
+  flex: 1 0 auto;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* --- Typography ---------------------------------------------------------- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 20px;
+}
+
+h1 {
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 44px;
+}
+
+h2 {
+  margin-top: 20px;
+  font-size: 29px;
+  font-weight: 400;
+  line-height: 36px;
+}
+
+h3 {
+  margin: 20px 0 10px;
+  color: var(--color-primary);
+  font-size: 24px;
+  line-height: 30px;
+}
+
+h4 {
+  margin: 10px 0;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+p {
+  margin: 0 0 15px;
+}
+
+strong {
+  font-weight: 700;
+}
+
+/* --- Layout helpers ------------------------------------------------------ */
+/* Webflow's .w-container is 940px wide *including* the edges of the
+   content, so the padding is folded into the max-width here to keep the
+   rendered content box at exactly 940px on desktop. */
+/* Webflow's .w-container is a 940px border-box with no horizontal padding
+   (`max-width: 940px; margin-left/right: auto`), so the element box itself must
+   be 940 wide for backgrounds/borders and shrink-wrapped children to line up. */
+.container {
+  position: relative;
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+}
+
+/* Shared section headings */
+.section-title {
+  margin: 0;
+  font-size: 46px;
+  font-weight: 300;
+  line-height: 39px;
+}
+
+.section-desc {
+  margin-top: 30px;
+  font-size: 21px;
+  font-weight: 300;
+  line-height: 27px;
+}
+
+.section-desc--narrow {
+  width: 70%;
+  margin-top: 25px;
+  font-size: 20px;
+}
+
+.eyebrow {
+  margin-bottom: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.heading-block {
+  width: 100%;
+  margin-bottom: 60px;
+  text-align: left;
+}
+
+.heading-block--centered {
+  width: 60%;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.heading-block--tight {
+  margin-bottom: 30px;
+}
+
+/* --- Buttons ------------------------------------------------------------- */
+.btn {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  /* Webflow: .w-button line-height inherits the 23px body value, padding 9px */
+  padding: 9px 25px;
+  border: 0;
+  border-radius: 3px;
+  background-color: var(--color-navy);
+  color: #fff;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 23px;
+  letter-spacing: 1px;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background-color: var(--color-primary-dark);
+  color: #fff;
+  box-shadow: 0 8px 16px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Pill variant (used by the "save contact / phone / email" buttons) */
+.btn--pill {
+  border: 2px solid #fff;
+  border-radius: 20px;
+  padding-block: 9px;
+}
+
+.btn--pill:hover,
+.btn--pill:focus-visible {
+  box-shadow: 0 8px 16px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Reveal animations ---------------------------------------------------
+   Port of the export's load and scroll interactions: the hero copy fades up,
+   the three intro cards zoom in and the collage mockups slide into place.
+   The hidden start states are scoped to `html.js` (set by an inline script in
+   <head>) so nothing is ever invisible without JavaScript, and the whole block
+   is skipped for visitors who ask for reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  /* on-load reveals: --anim-delay is the export's `wait` before the tween */
+  html.js [data-anim] {
+    opacity: 0;
+    transition: transform 500ms ease, opacity 500ms ease;
+    transition-delay: var(--anim-delay, 0ms);
+  }
+
+  html.js [data-anim="fade-up"] {
+    transform: translateY(30px);
+  }
+
+  html.js [data-anim="zoom"] {
+    transform: scale(0.9);
+  }
+
+  html.js [data-anim].is-shown {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* scroll reveals: the mockups slide in from the left and slide back out when
+     they leave the viewport again, exactly like the original scroll trigger */
+  html.js [data-anim-scroll="slide"] {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: transform var(--anim-out, 400ms) ease,
+      opacity var(--anim-out, 400ms) ease;
+  }
+
+  html.js [data-anim-scroll="slide"].is-shown {
+    opacity: 1;
+    transform: none;
+    transition-duration: 800ms;
+    transition-delay: var(--anim-delay, 0ms);
+  }
+
+  /* the globe does not fade: it drifts from 50px to -10px */
+  html.js [data-anim-scroll="shift"] {
+    transform: translateX(50px);
+    transition: transform 400ms ease;
+  }
+
+  html.js [data-anim-scroll="shift"].is-shown {
+    transform: translateX(-10px);
+    transition-duration: 800ms;
+  }
+}
+
+/* --- Navbar -------------------------------------------------------------- */
+/* Webflow: .navbar is a centred flex row and .w-container has no width, so the
+   container shrinks to the logo's footprint and sits dead centre. */
+.navbar {
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-block: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background-image: linear-gradient(#fff, rgba(255, 255, 255, 0) 90%);
+  background-clip: padding-box;
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  width: auto;
+}
+
+.logo-link {
+  display: inline-flex;
+  align-items: center;
+}
+
+.logo {
+  width: auto;
+  height: 60px;
+}
+
+/* --- Hero ---------------------------------------------------------------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  /* The photo sits in an <img> behind a translucent overlay, so the section has
+     to become a stacking context of its own. Without this the overlay's
+     z-index escapes and paints over the intro cards that are pulled up into the
+     hero's bottom edge (the export used a CSS background, which needed none of
+     this). */
+  isolation: isolate;
+  background-color: var(--color-navy);
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+
+.hero__overlay {
+  position: relative;
+  z-index: 1;
+  padding-block: 240px 210px;
+  background-color: rgba(3, 0, 91, 0.58);
+}
+
+.hero__inner {
+  /* .container is a flex column in Webflow, so the title's 20px bottom margin and
+     the subtitle's 35px top margin add up to 55px instead of collapsing. */
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.hero__title {
+  margin: 0 0 20px;
+  color: #fff;
+  font-size: 70px;
+  font-weight: 600;
+  line-height: 54px;
+}
+
+.hero__subtitle {
+  width: 70%;
+  margin: 35px auto 0;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 200;
+  line-height: 32px;
+}
+
+/* --- Intro cards --------------------------------------------------------- */
+/* Mirrors the Webflow collage: a 610px tall relatively positioned track that
+   is pulled 127px up into the hero, with the three cards absolutely placed so
+   the middle card overlaps its neighbours and sits 56px higher. */
+.intro {
+  padding-block: 80px;
+}
+
+.intro__grid {
+  position: relative;
+  height: 610px;
+  margin-top: -127px;
+}
+
+.intro__card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30%;
+  text-align: center;
+}
+
+.intro__card--mid {
+  z-index: 10;
+  top: -56px;
+  left: 250px;
+  width: 47%;
+}
+
+.intro__card:last-child {
+  right: 0;
+  left: auto;
+}
+
+.intro__media {
+  display: block;
+  height: 340px;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.intro__card--mid .intro__media {
+  height: 450px;
+}
+
+.intro__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+/* Card 2 (middle) and card 3 (right) use different focal points */
+.intro__card:nth-child(2) .intro__media img {
+  object-position: 20% 50%;
+}
+
+.intro__card:nth-child(3) .intro__media img {
+  object-position: 100% 50%;
+}
+
+.intro__text {
+  width: 200px;
+  max-width: 100%;
+  margin: 40px auto 0;
+}
+
+.intro__text--mid {
+  width: 68%;
+}
+
+.intro__title {
+  margin: 0 0 20px;
+  color: var(--color-heading);
+  font-size: 23px;
+  font-weight: 600;
+  /* original .intro-block-title sets no line-height: inherits body 23px */
+  line-height: 23px;
+}
+
+.intro__text p {
+  /* base `p` margin-bottom survives inside the absolutely positioned card */
+  margin: 0 0 15px;
+  color: var(--color-ink-soft);
+}
+
+/* CTA duplicated under the middle card (desktop) and last card (mobile).
+   Webflow's .w-button is an inline-block, so its 20px top margin stacks on top
+   of the paragraph's trailing 15px margin instead of collapsing with it. */
+.cta-desktop {
+  display: inline-block;
+}
+
+.cta-mobile {
+  display: none;
+}
+
+/* --- Certifications ------------------------------------------------------ */
+.certs {
+  position: relative;
+  overflow: hidden;
+  /* same reason as .hero: the photo + overlay pair must not leak its stacking
+     order into the rest of the page */
+  isolation: isolate;
+  background-color: var(--color-navy);
+}
+
+.certs__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 100% 50%;
+}
+
+.certs__overlay {
+  position: relative;
+  z-index: 1;
+  padding-block: 145px 105px;
+  color: #fff;
+  background-color: rgba(3, 0, 91, 0.58);
+}
+
+.certs__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 20px;
+  align-items: start;
+  /* .w-row pulls 10px past the container and each .w-col adds it back as
+     padding, so the columns are 320px wide starting at x=148 */
+  width: calc(100% + 20px);
+  margin-inline: -10px;
+  padding-inline: 10px;
+  /* 60px heading gap + 40px row gap from the original (margins don't collapse
+     inside Webflow's flex container, they do here, hence the combined value) */
+  margin-top: 100px;
+}
+
+.certs__logo {
+  display: block;
+  width: 90%;
+  height: auto;
+  /* every logo is a 400px square that Webflow's flex cell shrinks to 261px */
+  max-width: 261px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* --- Features / collage -------------------------------------------------- */
+.features {
+  padding-block: 80px;
+  overflow: hidden;
+}
+
+.features__grid {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  align-items: start;
+  /* Webflow's .w-row pulls 10px past the container on both sides, and each
+     .w-col restores it as padding — so the two columns are 400px/560px wide
+     starting at x=148 instead of 392/548 starting at x=158 */
+  width: calc(100% + 20px);
+  margin-inline: -10px;
+}
+
+.features__collage {
+  position: relative;
+  /* keep the absolutely positioned mockups anchored to the 940px container
+     edge (x=158) even though the row itself now starts at x=148 */
+  margin-left: 10px;
+}
+
+.features__world,
+.features__plane,
+.features__traveller {
+  position: absolute;
+  height: auto;
+  /* Webflow anchors these to the 940px .container, so `max-width: 100%` never
+     kicks in; here the collage column is narrower than the artwork */
+  max-width: none;
+}
+
+.features__world {
+  z-index: 3;
+  top: 3px;
+  left: -160px;
+  width: 515px;
+}
+
+.features__plane {
+  z-index: 4;
+  top: 59px;
+  left: 20px;
+  width: 400px;
+}
+
+.features__traveller {
+  z-index: 5;
+  top: 180px;
+  left: 110px;
+  width: 300px;
+}
+
+.features__content {
+  /* .info-column-right.responsive doubles as the w-col: 50px above, 40px below,
+     70px left plus the column's own 10px right padding */
+  padding: 50px 10px 40px 70px;
+}
+
+.feature {
+  position: relative;
+  margin-top: 25px;
+  padding: 0 20px 0 65px;
+}
+
+.feature__icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 34px;
+}
+
+.feature__title {
+  margin: 0 0 14px;
+  color: var(--color-ink);
+  font-size: 19px;
+  line-height: 23px;
+}
+
+.feature p {
+  /* base `p` margin-bottom (15px) stays inside the last block in Webflow */
+  margin: 0 0 15px;
+  color: var(--color-ink-soft);
+  font-size: 14px;
+  line-height: 22px;
+}
+
+/* --- Contact CTA (ui-section) -------------------------------------------- */
+.cta {
+  position: relative;
+  overflow: hidden;
+  padding-block: 90px;
+  background-color: #eee;
+}
+
+.cta__bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 0;
+  width: 60%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 100% 50%;
+}
+
+.cta__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image: linear-gradient(
+    86deg,
+    #eee 39%,
+    rgba(238, 238, 238, 0.2)
+  );
+}
+
+.cta .container {
+  z-index: 2;
+}
+
+.cta__content {
+  width: 45%;
+}
+
+.cta__content p {
+  color: var(--color-ink);
+}
+
+.cta__actions {
+  width: 50%;
+  /* Webflow's .container-3 is a .w-container whose :before/:after clearfix
+     stops the button's 20px top margin from collapsing out of it */
+  display: flow-root;
+}
+
+/* --- Team ---------------------------------------------------------------- */
+.team {
+  padding-block: 80px;
+  overflow: hidden;
+  color: #fff;
+  background-color: var(--color-navy-deep);
+}
+
+.team__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  width: 70%;
+  margin-inline: auto;
+}
+
+.team-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* .team-body is a float in Webflow, so cards keep their own height instead of
+     stretching to the tallest one in the row */
+  align-self: start;
+  margin-top: 50px;
+  margin-inline: 15px;
+  padding-bottom: 20px;
+  border-radius: 20px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.team-card__photo-link {
+  display: block;
+  width: 70%;
+  margin-top: -50px;
+  border-radius: 50%;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+}
+
+.team-card__photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.team-card__name {
+  width: 80%;
+  /* .heading margin-top 20px + the inherited h2 margin-bottom 20px */
+  margin: 20px auto;
+  color: var(--color-ink);
+  font-size: 29px;
+  font-weight: 400;
+  line-height: 36px;
+}
+
+/* The name links to the profile as well, and needs an affordance of its own:
+   the only other way in is the portrait, which doesn't look like a link. The
+   padding/margin pair leaves the box where it is but gives the link a 45px
+   tall target for a thumb. */
+.team-card__name a {
+  display: inline-block;
+  padding-block: 8px;
+  margin-block: -8px;
+}
+
+.team-card__name a:hover,
+.team-card__name a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.team-card__bio {
+  width: 80%;
+  margin: 0 auto 15px;
+  color: var(--color-ink);
+}
+
+.team-card__role {
+  /* .text-block is full width — the 20px italic em is simply centred in it, and
+     its inline-block box makes the line 25px tall instead of the 23px leading */
+  width: 100%;
+  margin: 0;
+  color: var(--color-ink);
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 25px;
+}
+
+/* --- Footer -------------------------------------------------------------- */
+.footer {
+  margin-top: auto;
+  padding-block: 20px;
+  border-top: 1px solid #eee;
+  background-color: #979da5;
+}
+
+.footer__grid {
+  display: grid;
+  /* .quick-stack ships `grid-auto-columns: 1fr` and both tracks resolve to the
+     wider copyright line (301.219px), so the two cells are equal even though
+     the first line is 18px shorter */
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  /* .w-layout-cell is a flex column with align-items:flex-start, so each
+     copyright line shrink-wraps inside its track instead of filling it */
+  justify-items: start;
+  gap: 20px;
+  /* .quick-stack is a shrink-to-fit grid (align-self:center inside Webflow's
+     flex .container) with 20px side padding: it is exactly as wide as the two
+     copyright lines plus the gaps, then centred inside the 940px container */
+  width: max-content;
+  margin-inline: auto;
+  padding: 0 20px;
+}
+
+.footer__grid p {
+  margin: 0;
+  color: var(--color-ink);
+  font-size: 12px;
+  /* .bottom-footer-paragraph only sets the size — the 23px body leading wins */
+  line-height: 23px;
+  text-align: center;
+}
+
+.footer__credit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  margin: 10px 0 0;
+  color: var(--color-ink);
+  font-size: 12px;
+  line-height: 23px;
+  text-align: center;
+}
+
+.footer__credit a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.footer__credit img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+/* --- Subpage header (contact + team profiles) ---------------------------- */
+.subpage-header {
+  position: relative;
+  overflow: hidden;
+  padding-block: 190px 90px;
+  color: #fff;
+  text-align: center;
+  background-color: var(--color-navy);
+}
+
+.subpage-header--contact {
+  padding-top: 120px;
+  /* The white form card intentionally hangs below the photo band. */
+  overflow: visible;
+}
+
+.subpage-header__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+
+.subpage-header__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-color: rgba(3, 0, 91, 0.58);
+}
+
+.subpage-header .container {
+  z-index: 2;
+  /* Webflow's .container is a flex column with space-around; this is what lets
+     the form card's -265px bottom margin pull the header's height back up. */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+/* --- Contact form -------------------------------------------------------- */
+.contact-card {
+  position: relative;
+  z-index: 10;
+  width: 60%;
+  margin: 0 auto -265px;
+  padding: 35px 45px;
+  border-radius: var(--radius);
+  background-color: #fff;
+  color: #000;
+  text-align: left;
+  box-shadow: var(--shadow-card);
+}
+
+.contact-card__title {
+  margin: 0 0 20px;
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 34px;
+  text-align: center;
+}
+
+.contact-card__subtitle {
+  margin: 13px 0 40px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 16px;
+  text-align: center;
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 5px;
+  color: #989ba2;
+  font-size: 13px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.field {
+  display: block;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: var(--radius);
+  background-color: #f2f3f7;
+  color: var(--color-ink);
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.42857;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.field:hover {
+  background-color: #dfe1e7;
+}
+
+.field:focus {
+  outline: 0;
+  background-color: #fff;
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.field--area {
+  height: 100px;
+  padding-top: 12px;
+  resize: vertical;
+}
+
+/* Webflow's submit is `.button.w-button`: inline-block with min-width:100%. Being
+   inline-level, its 20px top margin does not collapse into the textarea's 10px
+   bottom margin, so the gap above it is 30px (not 20px). */
+.contact-card .btn {
+  display: inline-block;
+  width: 100%;
+}
+
+/* Visually hidden honeypot — bots fill it in, humans never see it */
+.honeypot {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+/* --- Contact details ----------------------------------------------------- */
+.contact-details {
+  padding-top: 240px;
+  padding-bottom: 80px;
+  background-color: #f0f2f5;
+}
+
+.contact-details__grid {
+  display: grid;
+  /* Webflow puts the column count on the quick-stack's #w-node rule:
+     4 / 2 / 1 columns across its three breakpoints. */
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-columns: 1fr;
+  justify-content: center;
+  column-gap: 20px;
+  row-gap: 20px;
+  padding: 20px;
+}
+
+.contact-details__cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.contact-details__grid h4 {
+  text-transform: uppercase;
+}
+
+.contact-details__body {
+  color: var(--color-ink-soft);
+  white-space: pre-line;
+}
+
+/* --- Team profile pages -------------------------------------------------- */
+.profile {
+  text-align: center;
+}
+
+.profile__inner {
+  /* Webflow's `.container-4` is a block with `width: auto; max-width: 400px;
+     margin: auto`. Inside our flex-column header container, `width: auto` plus
+     auto margins would shrink-wrap instead of filling, so state the 100% fill
+     explicitly and let max-width cap it at 400px. */
+  width: 100%;
+  max-width: 400px;
+  margin-inline: auto;
+}
+
+.profile__photo-wrap {
+  width: 70%;
+  margin: 0 auto 20px;
+}
+
+/* .image-5 is a plain Webflow image (`max-width: 100%`, no width), so its used
+   size comes from the density-corrected intrinsic size of the picked srcset
+   candidate — at 479px that lands just short of the 70% wrapper. `width: auto`
+   cancels the width attribute Astro writes so that behaviour survives. */
+.profile__photo {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+/* .heading-3 — an <h1>, so the bare heading scale (38/44, 31/37 at 479) applies */
+.profile__name {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* .heading-2 — an <h2> that keeps the bare heading scale (29/36, 24/29 at 479) */
+.profile__role {
+  margin: 10px 0 20px;
+  font-weight: 300;
+}
+
+/* Webflow's `.w-button` is inline-block with min-width: 100%. Keeping the pill
+   buttons inline-level matters: adjacent block-level siblings would collapse the
+   role's 20px bottom margin into the button's 20px top margin (40px -> 20px). */
+.profile__inner .btn {
+  display: inline-block;
+  width: 100%;
+}
+
+.profile__socials {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 40px;
+}
+
+.profile__social-link {
+  width: 10%;
+  flex: 0 0 auto;
+}
+
+.profile__social-link img {
+  width: 100%;
+  height: auto;
+}
+
+/* --- Responsive ---------------------------------------------------------- */
+/* Breakpoints and values mirror the Webflow export's media queries:
+   991px (tablet), 767px (mobile landscape) and 479px (mobile portrait). */
+
+@media (max-width: 991px) {
+  /* .w-container steps down to 728px and only goes fluid at 479px */
+  .container {
+    max-width: 728px;
+  }
+
+  /* .navbar keeps a left gutter only */
+  .navbar {
+    padding: 20px 0 20px 20px;
+  }
+
+  /* .hero-overlay-block / .hero-main-title(.subtitle) */
+  .hero__overlay {
+    padding-block: 180px;
+  }
+
+  .hero__title {
+    font-size: 60px;
+    line-height: 44px;
+  }
+
+  .hero__subtitle {
+    width: 80%;
+    margin-bottom: 30px;
+    line-height: 34px;
+  }
+
+  /* .section */
+  .intro,
+  .features,
+  .team {
+    padding: 45px;
+  }
+
+  /* .section-title-wrapper(.full|.full.info) */
+  .heading-block {
+    margin-bottom: 20px;
+  }
+
+  /* only the `.full` variant (.section-title-wrapper.full) keeps the right
+     gutter; the plain wrapper is centred and unpadded */
+  .heading-block:not(.heading-block--centered) {
+    padding-right: 40px;
+  }
+
+  .heading-block--centered {
+    width: 85%;
+    margin-bottom: 40px;
+  }
+
+  .heading-block--tight {
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    margin-bottom: 4px;
+    font-size: 31px;
+    line-height: 30px;
+  }
+
+  .section-desc {
+    margin-top: 20px;
+    font-size: 19px;
+  }
+
+  /* .section-description.small — its own 25px top margin outranks the generic
+     .section-description one, so it is re-declared after it here */
+  .section-desc--narrow {
+    width: 80%;
+    margin-top: 25px;
+    font-size: 20px;
+  }
+
+  /* .image-section-overlay.color */
+  .certs__overlay {
+    padding: 90px 45px;
+  }
+
+  /* .feature-info-row still carries its own 40px top margin; the heading
+     wrapper above it collapses to a 20px bottom margin */
+  .certs__grid {
+    margin-top: 60px;
+  }
+
+  /* .feature-info-icon is 90% of the .w-col content box, which is 10px
+     narrower than this flat track (the original cell keeps a 10px left
+     padding the block sits inside) */
+  .certs__logo {
+    width: calc(90% - 9px);
+  }
+
+  /* .home-intro-wrapper.mid / .intro-block-text-wrapper(.mid|.last) */
+  .intro__card--mid {
+    left: 181px;
+  }
+
+  .intro__text {
+    font-size: 13px;
+  }
+
+  .intro__text--mid {
+    width: 75%;
+  }
+
+  .intro__card:last-child .intro__text {
+    width: 210px;
+  }
+
+  /* .home-mockup(.ipad|.iphone) — the collage stays visible */
+  .features__world {
+    top: -27px;
+    left: -200px;
+  }
+
+  .features__plane {
+    top: 19px;
+    left: -80px;
+  }
+
+  .features__traveller {
+    top: 140px;
+    left: 20px;
+  }
+
+  /* .info-column-right.responsive */
+  .features__content {
+    padding: 0 10px 0 50px;
+  }
+
+  /* .image-section.ui-section / .info-block-left.ui / .container-3 */
+  .cta {
+    padding-inline: 45px;
+  }
+
+  .cta__content {
+    width: 55%;
+  }
+
+  /* .homepage-row / .homepage-column */
+  .team__grid {
+    width: 100%;
+  }
+
+  .team-card {
+    margin-inline: 9px;
+  }
+
+  /* .subpage-header(.contact-1) / .white-contact-form / .form-title */
+  .subpage-header {
+    padding: 140px 45px 60px;
+  }
+
+  .subpage-header--contact {
+    padding-top: 110px;
+  }
+
+  .contact-card {
+    padding: 25px;
+  }
+
+  .contact-card__title {
+    font-size: 30px;
+  }
+
+  /* .section.below-contact-form keeps its 240px top padding (its own rule is
+     more specific than the .section one) and only drops the bottom to 35px */
+  .contact-details {
+    padding: 240px 45px 35px;
+  }
+
+  .footer__credit {
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  /* .w-container goes fluid */
+  .container {
+    max-width: none;
+  }
+
+  /* .navbar / .logo */
+  .navbar {
+    padding: 20px 0;
+  }
+
+  .logo {
+    height: 30px;
+  }
+
+  /* .hero-overlay-block / .hero-main-title(.subtitle) */
+  .hero__overlay {
+    padding: 130px 25px;
+  }
+
+  .hero__title {
+    margin-bottom: 10px;
+    font-size: 40px;
+  }
+
+  .hero__subtitle {
+    margin-top: 0;
+    font-size: 16px;
+    line-height: 25px;
+  }
+
+  /* .section */
+  .intro,
+  .features,
+  .team {
+    padding: 25px;
+  }
+
+  /* .section-title-wrapper(.full|.full.info) */
+  .heading-block {
+    margin-bottom: 30px;
+  }
+
+  .heading-block--centered {
+    width: 95%;
+    margin-bottom: 40px;
+  }
+
+  .heading-block--tight {
+    text-align: center;
+    /* .section-title-wrapper.full.info keeps the 20px it picked up at 991 */
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    margin-bottom: 10px;
+    font-size: 26px;
+    line-height: 30px;
+  }
+
+  .section-desc--narrow {
+    width: 100%;
+    margin-top: 25px;
+    font-size: 18px;
+  }
+
+  /* .container.home-intro-container drops its height; the cards stop floating */
+  .intro__grid {
+    position: static;
+    height: auto;
+  }
+
+  /* .home-intro-wrapper stays `display: inline-block`, so the cards keep
+     establishing a BFC and the text wrapper's bottom margin is contained */
+  .intro__card,
+  .intro__card--mid,
+  .intro__card:last-child {
+    position: static;
+    display: flow-root;
+    width: 100%;
+  }
+
+  .intro__media,
+  .intro__card--mid .intro__media {
+    height: 300px;
+  }
+
+  .intro__card:last-child .intro__media {
+    height: 270px;
+  }
+
+  .intro__text,
+  .intro__text--mid,
+  .intro__card:last-child .intro__text {
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  .intro__card--mid .intro__text {
+    margin: 30px 0 40px;
+  }
+
+  /* the desktop button is swapped for the mobile one */
+  .cta-desktop {
+    display: none;
+  }
+
+  .cta-mobile {
+    display: block;
+  }
+
+  /* .image-section-overlay.color / .feature-info-row|-column|-icon */
+  .certs__overlay {
+    padding: 25px;
+  }
+
+  .certs__grid {
+    grid-template-columns: repeat(3, 1fr);
+    width: auto;
+    /* .feature-info-row drops its own top margin at this breakpoint, so the
+       gap is driven by the heading block's bottom margin alone (30px here,
+       20px at 479) */
+    margin: 0;
+    padding-inline: 0;
+    column-gap: 0;
+    row-gap: 0;
+  }
+
+  /* .feature-info-icon goes back to its intrinsic size, capped by the 90%
+     wide .feature-info-block that wraps it; .feature-info-column carries the
+     20px bottom padding */
+  .certs__logo {
+    width: 90%;
+    max-width: 100%;
+    margin-top: -12px;
+    margin-bottom: 20px;
+  }
+
+  /* .homepage-row / .homepage-column / .team-body / .spacer-for-mobile */
+  .team__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .team-card {
+    margin-inline: 0;
+  }
+
+  /* .team-body keeps its 50px top margin and the 40px mobile spacer shows */
+  .team-card + .team-card {
+    margin-top: 90px;
+  }
+
+  /* .w-row margins drop to 0 and each .w-col goes full width */
+  .features__grid {
+    grid-template-columns: 1fr;
+    width: auto;
+    margin-inline: 0;
+  }
+
+  .features__content {
+    padding: 0 10px 0 0;
+  }
+
+  /* .home-mockup-column / .home-mockup(.ipad|.iphone) — the mockups keep the
+     tablet `left` and are re-anchored with `right`, exactly as the export does */
+  .features__collage {
+    height: 290px;
+    margin-left: 0;
+  }
+
+  .features__world {
+    top: 0;
+    left: -350px;
+    right: -200px;
+    width: auto;
+    height: 290px;
+    margin-inline: auto;
+  }
+
+  .features__plane {
+    top: -20px;
+    right: -200px;
+    width: auto;
+    height: 210px;
+    /* the 991 left (-80px) survives: .home-mockup.ipad outranks .home-mockup */
+    margin-inline: auto;
+  }
+
+  .features__traveller {
+    top: 100px;
+    right: -131px;
+    width: auto;
+    height: 170px;
+    /* the 991 left (20px) survives for the same reason */
+    margin-inline: auto;
+  }
+
+  /* .image-section.ui-section / .container-3 */
+  .cta {
+    padding: 25px;
+  }
+
+  .cta__actions {
+    width: 100%;
+  }
+
+  /* .subpage-header(.contact-1) / .white-contact-form(.centered) / .form-title */
+  .subpage-header {
+    padding: 110px 25px 40px;
+  }
+
+  .subpage-header--contact {
+    padding-top: 90px;
+  }
+
+  .contact-card {
+    width: 100%;
+    height: auto;
+    margin-bottom: -245px;
+    text-align: left;
+  }
+
+  .contact-card__title {
+    margin-bottom: 10px;
+    text-align: left;
+  }
+
+  .contact-card__subtitle {
+    margin-bottom: 30px;
+  }
+
+  /* .section.below-contact-form / .quick-stack */
+  .contact-details {
+    padding-inline: 25px;
+  }
+
+  .contact-details__grid {
+    /* only the column count changes here: .w-layout-layout keeps its 20px
+       padding and gaps at every breakpoint */
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* .simple-white-footer / .bottom-footer-paragraph(.right|.dark) */
+  .footer {
+    padding: 10px 25px;
+    text-align: center;
+  }
+
+  /* .w-container is `display: flex` in Webflow, so the grid's 5px bottom
+     margin and the credit's 5px top margin stack instead of collapsing */
+  .footer .container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding-block: 0;
+    margin-bottom: 5px;
+  }
+
+  .footer__grid p {
+    margin-bottom: 0;
+  }
+
+  .footer__credit {
+    margin-top: 5px;
+  }
+}
+
+@media (max-width: 479px) {
+  /* .w-container / .navbar */
+  .container {
+    max-width: none;
+  }
+
+  .navbar {
+    padding: 10px 10px 10px 0;
+  }
+
+  /* .hero-overlay-block / .hero-main-title(.subtitle) */
+  .hero__overlay {
+    padding: 90px 15px 110px;
+  }
+
+  .hero__title {
+    font-size: 30px;
+    line-height: 37px;
+  }
+
+  .hero__subtitle {
+    width: 90%;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  /* bare headings step down one size at this breakpoint */
+  h1 {
+    font-size: 31px;
+    line-height: 37px;
+  }
+
+  h2 {
+    font-size: 24px;
+    line-height: 29px;
+  }
+
+  /* .heading is an <h2> in the export, so the team name picks up that scale */
+  .team-card__name {
+    font-size: 24px;
+    line-height: 29px;
+  }
+
+  /* .section-title-wrapper(.full|.full.info) */
+  .heading-block:not(.heading-block--centered) {
+    margin-bottom: 20px;
+    padding-right: 0;
+  }
+
+  .heading-block--centered {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .heading-block--tight {
+    margin-bottom: 20px;
+    padding-right: 0;
+    text-align: center;
+  }
+
+  .section-title {
+    font-size: 25px;
+    line-height: 26px;
+  }
+
+  .section-desc {
+    margin-top: 14px;
+    font-size: 15px;
+    line-height: 23px;
+  }
+
+  .section-desc--narrow {
+    width: 100%;
+    margin-top: 15px;
+    font-size: 17px;
+    line-height: 25px;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    line-height: 21px;
+  }
+
+  /* .intro-block-title / .intro-block-text-wrapper.mid */
+  .intro__title {
+    margin-bottom: 10px;
+  }
+
+  .intro__card--mid .intro__text {
+    margin-bottom: 30px;
+  }
+
+  /* .image-section-overlay.color / .feature-info-column.last / .feature-info-icon */
+  .certs__overlay {
+    padding: 20px;
+  }
+
+  .certs__logo {
+    margin-top: -3px;
+  }
+
+  .certs__logo:last-child {
+    margin-bottom: 0;
+  }
+
+  /* .long-feature-block / .long-feature-title / .description-paragraph */
+  .feature {
+    padding: 0 10px 0 55px;
+  }
+
+  .feature__title {
+    margin-bottom: 7px;
+  }
+
+  .feature p {
+    font-size: 12px;
+    line-height: 19px;
+  }
+
+  /* .home-mockup-column / .home-mockup(.ipad|.iphone) */
+  .features__collage {
+    height: 180px;
+  }
+
+  .features__world {
+    height: 160px;
+    right: -300px;
+  }
+
+  .features__plane {
+    top: 0;
+    height: 120px;
+    right: -115px;
+  }
+
+  .features__traveller {
+    top: 52px;
+    height: 100px;
+    right: -61px;
+  }
+
+  /* .image-section.ui-section swaps in the small card art */
+  .cta__bg {
+    display: none;
+  }
+
+  .cta__scrim {
+    background-image: linear-gradient(
+        86deg,
+        #eee 39%,
+        rgba(238, 238, 238, 0.8)
+      ),
+      url("../assets/images/card2-small.webp");
+    background-position: 0 0, 50%;
+    background-repeat: repeat, no-repeat;
+    background-size: auto, cover;
+  }
+
+  /* .info-block-left.ui */
+  .cta__content {
+    width: 90%;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  /* .button / .button-copy */
+  .btn {
+    margin-top: 10px;
+    padding-inline: 19px;
+    font-size: 11px;
+    line-height: 21px;
+  }
+
+  .btn--pill {
+    margin-bottom: 10px;
+  }
+
+  /* .subpage-header(.contact-1) / .white-contact-form(.centered) / .form-title */
+  .subpage-header {
+    padding-top: 90px;
+    padding-bottom: 20px;
+  }
+
+  .subpage-header--contact {
+    flex: 1;
+    padding: 80px 20px 20px;
+  }
+
+  /* .body is a flex column on the pages that carry a .subpage-header, and
+     .subpage-header flexes to fill it so the footer hugs the viewport bottom */
+  body:has(.subpage-header--contact) {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  body:has(.subpage-header--contact) main {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+  }
+
+  .contact-card {
+    margin-bottom: -225px;
+  }
+
+  .contact-card__subtitle {
+    margin-bottom: 20px;
+    font-size: 15px;
+    line-height: 19px;
+  }
+
+  /* .quick-stack */
+  .contact-details__grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* .simple-white-footer / .quick-stack */
+  .footer {
+    padding: 10px 15px;
+  }
+
+  .footer__grid {
+    padding-inline: 0;
+  }
+
+  /* .div-block-6 / .div-block-7 */
+  .profile__photo-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .profile__socials {
+    align-items: stretch;
+    margin-top: 20px;
+  }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* --- Utility pages (thank-you, 404) --------------------------------------
+   These pages have no hero band, so the absolutely positioned navbar has
+   nothing to overlap: the top padding below clears it instead. */
+.notice {
+  padding-top: 200px;
+  padding-bottom: 140px;
+  text-align: center;
+}
+
+.notice__inner {
+  max-width: 620px;
+}
+
+.notice__title {
+  margin: 0;
+  font-size: 46px;
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--color-heading);
+}
+
+.notice__text {
+  margin-top: 24px;
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+.notice__text a {
+  color: var(--color-primary);
+}
+
+.notice__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  margin-top: 36px;
+}
+
+/* .btn is styled full-width for the forms; these are side-by-side buttons. */
+.notice__actions .btn {
+  width: auto;
+  margin-top: 0;
+  padding-inline: 30px;
+  border-radius: 20px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.notice__actions .btn--outline {
+  border: 2px solid var(--color-navy);
+  background-color: transparent;
+  color: var(--color-navy);
+}
+
+.notice__actions .btn--outline:hover,
+.notice__actions .btn--outline:focus-visible {
+  background-color: var(--color-navy);
+  color: #fff;
+}
+
+@media (max-width: 767px) {
+  .notice {
+    padding-top: 150px;
+    padding-bottom: 100px;
+  }
+
+  .notice__title {
+    font-size: 34px;
+  }
+
+  .notice__text {
+    font-size: 18px;
+  }
+}
+
+/* --- Mobile refinements ---------------------------------------------------
+   Deliberate departures from the Webflow export at <=767px. Everything above
+   this block mirrors the export pixel for pixel; the export's approach to
+   mobile is to shrink the desktop composition (fixed-position collage, 13px
+   intro copy, 12px feature copy, 11px buttons, 14px inputs) rather than
+   re-flow it, and three things break as a result:
+
+     1. form fields under 16px make iOS Safari zoom the page on focus,
+     2. controls under 44px tall are hard to hit with a thumb,
+     3. the collage keeps desktop's negative offsets and gets clipped.
+
+   Desktop (>=768px) is untouched, so the geometry parity harness still covers
+   the original layout at 1280 and 991. */
+
+@media (max-width: 767px) {
+  /* The hero band and the intro grid's 127px pull-up stay exactly as the export
+     has them (130px overlay padding, cards overlapping the photo edge). An
+     earlier pass replaced the band with a 66svh flex hero and cancelled the
+     pull-up; the overlap reads as intentional layering on a phone and the
+     taller band pushed the first card off the fold, so both were reverted.
+     Do not "fix" this: nothing below touches .hero or .intro__grid. */
+
+  /* Optional property: browsers that don't support it keep the plain rag */
+  .section-title,
+  .notice__title {
+    text-wrap: balance;
+  }
+
+  /* The collage keeps the desktop's absolute composition and bleeds past the
+     right edge at these widths, clipping the traveller in half. Rebuild it as
+     one contained composition whose parts scale with the container. */
+  .features__collage {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    height: auto;
+    /* 340x200 is the composition below, in percent */
+    aspect-ratio: 340 / 200;
+    margin: 0 auto 24px;
+  }
+
+  .features__world,
+  .features__plane,
+  .features__traveller {
+    position: absolute;
+    right: auto;
+    width: 44%;
+    height: auto;
+    margin: 0;
+  }
+
+  .features__world {
+    top: 10%;
+    left: 0;
+  }
+
+  .features__plane {
+    top: 0;
+    left: 20%;
+  }
+
+  .features__traveller {
+    top: 44%;
+    left: 62%;
+    width: 33%;
+  }
+
+  /* The logos sat on a 50%-transparent plate over a photograph; an opaque
+     plate keeps them legible on a phone. */
+  .certs__logo {
+    padding: 6px;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+
+  /* Narrower measure needs more scrim behind the copy */
+  .certs__overlay {
+    background-color: rgba(3, 0, 91, 0.7);
+  }
+
+  /* 44px is the documented minimum touch target. The buttons were 39px tall,
+     the logo link 30px and the social icons 35px. The negative margins cancel
+     the padding, so the layout boxes stay where the export put them. */
+  .btn {
+    min-height: 46px;
+    padding-block: 11px;
+    font-size: 12px;
+    line-height: 23px;
+  }
+
+  .logo-link {
+    padding-block: 7px;
+    margin-block: -7px;
+  }
+
+  .footer__credit a {
+    padding-block: 11px;
+    margin-block: -11px;
+  }
+
+  .profile__social-link {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+  }
+
+  .profile__social-link img {
+    width: 35px;
+    height: 35px;
+  }
+
+  /* iOS Safari zooms the page when a field smaller than 16px gets focus, and
+     it does not zoom back out. */
+  .field {
+    height: 46px;
+    font-size: 16px;
+  }
+
+  .field--area {
+    height: 132px;
+  }
+
+  /* #989ba2 on white is about 2.8:1 — below AA for text this small */
+  .field-label {
+    color: #6b7280;
+  }
+}
+
+/* Between 480 and 767 the intro cards run the full width of the section, which
+   turns the 290px-tall media into 2.5:1 letterbox bands and stretches the 13px
+   copy across ~700px. Cap both and keep the card proportions. */
+@media (min-width: 480px) and (max-width: 767px) {
+  .intro__media,
+  .intro__card--mid .intro__media,
+  .intro__card:last-child .intro__media {
+    max-width: 560px;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    margin-inline: auto;
+  }
+
+  .intro__text,
+  .intro__text--mid,
+  .intro__card:last-child .intro__text {
+    max-width: 520px;
+    margin-inline: auto;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 479px) {
+  /* The export uses one 25px padding on all four sides; phone sections need
+     more vertical air and less side inset. */
+  .intro,
+  .features,
+  .team {
+    padding: 40px 20px;
+  }
+
+  /* Hero type left at the export's 30px / 15px: it sizes the band along with the
+     90/110px overlay padding, and the intro cards sit inside that band. */
+
+  /* Copy the export drops below the 15px body scale */
+  .intro__text p {
+    font-size: 15px;
+  }
+
+  .feature p {
+    font-size: 14px;
+    line-height: 21px;
+  }
+
+  /* The role sat below a full paragraph of bio, as a caption pinned to the
+     card's bottom edge. The profile pages put it straight under the name, so
+     the stacked card matches them. */
+  .team-card__name {
+    order: 1;
+    margin-bottom: 8px;
+  }
+
+  .team-card__role {
+    order: 2;
+    margin: 0 auto 18px;
+  }
+
+  .team-card__bio {
+    order: 3;
+  }
+
+  /* The card title is left aligned at this width but the subtitle stayed
+     centred. The details grid also sat 25px further in than the card (its own
+     25px section padding plus the grid's 20px), so the columns no longer
+     lined up under the card's left edge. */
+  .contact-card__subtitle {
+    text-align: left;
+  }
+
+  .contact-details {
+    padding-inline: 20px;
+  }
+
+  .contact-details__grid {
+    padding: 0;
+    row-gap: 28px;
+  }
+}
+
+/* --- Desktop fold ---------------------------------------------------------
+   The hero band (645px) plus the intro collage (643px) measure 1288px, and the
+   export simply let the certs band start wherever that landed. On a tall
+   window - 1300px viewports are ordinary at 1440p and 4K - the top of the dark
+   certs band therefore peeked above the fold. Grouping the two sections lets
+   the pair claim exactly the first screen: the hero keeps its size, the intro
+   absorbs whatever height is left over, and the certs band begins at the fold.
+
+   Only the intro's own box grows. Its 610px track holds absolutely positioned
+   cards, so the spare height collects underneath the collage and nothing inside
+   the two sections moves or re-wraps. Shorter windows are untouched -
+   min-height can only add space, and at 1288px the pair already overflows
+   them. The mobile refinements block earlier in the file still owns <=767px,
+   where the wrapper is a plain block. */
+@media (min-width: 768px) {
+  .above-fold {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+
+  .above-fold > .hero {
+    flex: 0 0 auto;
+  }
+
+  .above-fold > .intro {
+    flex: 1 0 auto;
+  }
+}
+

@@ -1,0 +1,51 @@
+# Inter City Service & Travel — https://www.myintercity.com
+#
+# Every page here is meant to be read: there is nothing private to hide. The
+# AI / answer-engine crawlers are listed explicitly so that travel answers
+# citing us can quote accurate, current details.
+#
+# /thank-you/ is deliberately NOT disallowed: it carries a `noindex` meta tag,
+# and crawlers have to be able to fetch a page to see that directive. Blocking
+# it here would keep the URL eligible for indexing instead of removing it.
+
+User-agent: *
+Allow: /
+
+# AI and answer-engine crawlers — allowed on purpose
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://www.myintercity.com/sitemap.xml

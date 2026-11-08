@@ -1,0 +1,89 @@
+# Inter City Service & Travel — full site text
+
+Source: https://www.myintercity.com
+This file mirrors the readable text of the site for language models and answer
+engines. The structured index is at https://www.myintercity.com/llms.txt.
+
+---
+
+## Home — https://www.myintercity.com/
+
+# All your travel needs in one place.
+
+From booking to managing, corporate travel has never been this smooth.
+
+### Corporate Travel
+Elevate your corporate travel with our streamlined solutions, offering seamless coordination and personalized service to optimize your business ventures.
+
+### Luxurious Excursions
+Experience ultimate luxury with our bespoke excursions, tailored to exceed expectations at every destination.
+
+### Relaxing Getaways
+Relax and rejuvenate with our curated escapes to serene destinations, offering personalized amenities amidst breathtaking scenery.
+
+### Certified and accredited for your peace of mind
+Our travel agency holds certifications from Tourism Malaysia, MOTAC, MATTA, Bumitra, and IATA, alongside licenses from the Ministry of Finance. With access to Malaysia Airlines GOM portal and ample ticket stock, we're fully prepared to handle corporate travel needs for both corporations and government institutions, ensuring seamless experiences from ticket issuance to journey completion.
+
+Certification marks shown: Tourism Malaysia, Ministry of Tourism and Culture (MOTAC), MATTA, Bumitra, IATA Accredited Agent, Malaysia Airlines GOM.
+
+### Hassle-free traveling wherever you go
+
+**Ready to serve you 24/7**
+Our dedicated agents remain available round-the-clock to promptly address your inquiries. Leveraging our advanced ticketing system, Sabre, any of our agents can swiftly provide you with a quotation upon request.
+
+**Customizable travel itineraries**
+We pride ourselves on offering highly customizable travel experiences, and our commitment is to fulfill your every request to the best of our abilities, ensuring you receive precisely what you desire.
+
+### We are always at your fingertips
+All our agents are ready and will be with you shortly. You can reach us via email, WhatsApp or our dedicated 24-hour line.
+
+### Meet our team
+We have an excellent team of agents standing by to assist you but here are some of our core members.
+
+- **Noraini Ismail — Managing Director.** A veteran in the travel industry with over 30 years of experience. As the founder of ICS Travel and a seasoned leader, she has revolutionized the industry, notably through pioneering partnerships and a keen ability to satisfy clients' needs with fairness and precision.
+- **Zakaria H. Basaree — Marketing Director.** The driving force behind ICS Travel's marketing endeavors for over three decades. Renowned for his problem-solving prowess and client-centric approach, Zakaria ensures the company's global standing while spearheading impactful campaigns with passion and precision.
+- **Norman Zakaria — Sales & IT Manager.** Armed with a Computer Science degree and extensive sales experience, Norman modernized our IT systems, reducing costs and enhancing efficiency. Now, he effortlessly balances client visits and sales initiatives, ensuring our continued success as an industry leader.
+
+---
+
+## Contact — https://www.myintercity.com/contact/
+
+# What are you waiting for?
+
+Do you have a question? Contact us now. The enquiry form asks for a name, an
+email address and a message; submissions are emailed to the agency.
+
+### Our office
+Unit 1J, First Floor, Holiday Place Kuala Lumpur, 225, Jalan Ampang, 50450, Kuala Lumpur, Malaysia.
+https://maps.app.goo.gl/cyBiTEn59vCoKUfz6
+
+### Call us
+Feel free to call any of our agents waiting to take down your reservation on our dedicated 24-hour line linked below. Phone: +603 2935 8108.
+
+### Mail us
+Need to send us intricate details for a quotation or a customized travel plan? Send us an email at info@myintercity.com.
+
+### WhatsApp us
+If your preferred method of communication is through WhatsApp, message us at https://wasap.my/+60329358108.
+
+---
+
+## Team profiles
+
+- https://www.myintercity.com/noraini/ — Noraini Ismail, Managing Director. Phone +6019 333 8396, noraini@myintercity.com, downloadable contact card.
+- https://www.myintercity.com/zakaria/ — Zakaria Hassan Basaree, Marketing Director. Phone +6016 217 1767, zakaria@myintercity.com.
+- https://www.myintercity.com/norman/ — Norman Zakaria, Sales & IT Manager.
+
+---
+
+## Company details
+
+- Legal name: Inter City Service & Travel Sdn Bhd
+- Trading name: Inter City Service & Travel (ICS Travel)
+- Registration: 145913-M
+- KKKP licence: 0554
+- Location: Kuala Lumpur, Malaysia
+- Phone: +603 2935 8108 (24-hour line)
+- Email: info@myintercity.com
+- Hours: agents available 24 hours a day, every day
+- Booking model: enquiry and quotation by an agent; no online checkout

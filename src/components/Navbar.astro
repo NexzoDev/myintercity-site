@@ -1,0 +1,22 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/images/ics-20logo-20w-20text.webp";
+---
+
+<header class="navbar">
+  <div class="container navbar__inner">
+    <a href="/" class="logo-link" aria-label="Inter City Service & Travel — home">
+      <Image
+        src={logo}
+        alt="Inter City Service & Travel"
+        class="logo"
+        widths={[500, 614]}
+        sizes="(max-width: 767px) 211.72px, 423.44px"
+        format="webp"
+        quality={92}
+        loading="eager"
+        fetchpriority="high"
+      />
+    </a>
+  </div>
+</header>

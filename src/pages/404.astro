@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+/* Built to dist/404.html, which static hosts serve for unknown paths. */
+const title = "Page not found | Inter City Service & Travel";
+const description =
+  "The page you were looking for may have moved. Head back to the home page, or contact Inter City Service & Travel directly.";
+---
+
+<BaseLayout title={title} description={description} noindex>
+  <section class="notice">
+    <div class="container notice__inner">
+      <h1 class="notice__title">We can't find that page</h1>
+      <p class="notice__text">
+        The link may be out of date, or the page has moved. Everything else is
+        one click away — start from the home page, or talk to an agent
+        directly.
+      </p>
+      <div class="notice__actions">
+        <a class="btn" href="/">Back to home</a>
+        <a class="btn btn--outline" href="/contact/">Contact us</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
